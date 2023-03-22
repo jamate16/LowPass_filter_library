@@ -58,13 +58,13 @@ void LowPass<order>::setCoefficients(){
 
     // Update coefficients based on filter order
     float alpha = omega_c*delta_time; // Recurrent constant for discrete time filter's constants calculation
-    if (order==1) {
+    if constexpr (order==1) {
         // Coefficients based on first order filter discretized using Bilinear approximation
         a[0] = -(alpha - 2.0) / (alpha + 2.0);
         b[0] = alpha / (alpha + 2.0);
         b[1] = alpha / (alpha + 2.0);
 
-    } else if (order==2) {
+    } else if constexpr (order==2) {
         float beta[] = {1, sqrt(2), 1}; // Normalized butterworth polynomial coefficients
 
         // Coefficients based on non-normalized butterworth second order filter discretized using Bilinear approximation
